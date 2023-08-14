@@ -1,0 +1,15 @@
+/*!****************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/assets/css/style.css ***!
+  \****************************************************************************/
+.floatDiv {
+  position: absolute;
+  left: 50px;
+  top: 50px;
+  width: 300px;
+  height: 60px;
+  background-color: #23a0df;
+  color: white;
+  cursor: grab;
+}
+
+
