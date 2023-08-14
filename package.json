@@ -1,0 +1,35 @@
+{
+  "name": "js-web-float-notes",
+  "version": "0.0.1",
+  "description": "a float notes tool",
+  "main": "index.js",
+  "scripts": {
+    "release": "webpack --config webpack.config.js",
+    "demo": "http-server -p 8880"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CatBiter/js-web-float-notes.git"
+  },
+  "keywords": [
+    "float",
+    "notes"
+  ],
+  "author": "CatBiter",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CatBiter/js-web-float-notes/issues"
+  },
+  "homepage": "https://github.com/CatBiter/js-web-float-notes#readme",
+  "devDependencies": {
+    "@babel/core": "^7.22.10",
+    "@babel/preset-env": "^7.22.10",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^9.1.3",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-latest": "^6.24.1",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  }
+}
