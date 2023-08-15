@@ -1,29 +1,16 @@
 import './assets/css/style.css'
+import initialization from './initialization'
 
-const draggableDiv = document.createElement('div');
-draggableDiv.textContent = '拖动框1';
-draggableDiv.classList.add('floatDiv')
+initialization('notes')
+// // 初始化
+// const draggableIcon = document.createElement('div')
 
-let isDragging = false;
-let offsetX = 0;
-let offsetY = 0;
 
-draggableDiv.addEventListener('mousedown', (e) => {
-  isDragging = true;
-  offsetX = e.clientX - draggableDiv.getBoundingClientRect().left;
-  offsetY = e.clientY - draggableDiv.getBoundingClientRect().top;
-  draggableDiv.style.cursor = 'grabbing';
-});
+// const draggableDiv = document.createElement('div');
+// draggableDiv.textContent = '拖动框1';
+// draggableDiv.classList.add('floatDiv')
 
-document.addEventListener('mousemove', (e) => {
-  if (!isDragging) return;
-  draggableDiv.style.left = `${e.clientX - offsetX}px`;
-  draggableDiv.style.top = `${e.clientY - offsetY}px`;
-});
 
-document.addEventListener('mouseup', () => {
-  isDragging = false;
-  draggableDiv.style.cursor = 'grab';
-});
 
-document.body.appendChild(draggableDiv);
+
+// document.body.appendChild(draggableDiv);
