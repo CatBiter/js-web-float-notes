@@ -4,35 +4,72 @@ function initialization (id) {
   let oldElement = document.getElementById(id);
   let newElement = document.createElement('div')
   newElement.classList.add('floatIcon')
-  // let icon = document.createElement('img')
-  // icon.classList.add('noteIcon')
-  // icon.src = './assets/icon/笔记.svg'
-  // newElement.appendChild(icon)
+  newElement.classList.add('floatShadow')
+  newElement.classList.add('floatPosition')
+  let icon = document.createElement('img')
+  icon.src = '/src/assets/icon/note.svg'
+  icon.classList.add('noteIcon')
+  newElement.appendChild(icon)
 
   // 拖动
-  let isDragging = false;
-  let offsetX = 0;
-  let offsetY = 0;
+  let isDragging = false;   // 是否正在拖动
+  let offsetX = 0;          // 整个的X轴值
+  let offsetY = 0;          // 整个的Y轴值
 
+  // 判断是点击还是拖动
+  let beforeX = 0;
+  let beforeY = 0;
+  let afterX = 0;
+  let afterY = 0;
+
+  // 是否是图标
+  let isIcon = true;
+
+
+  // 当浮动图标被按下的时候
   newElement.addEventListener('mousedown', (e) => {
-    isDragging = true;
-    offsetX = e.clientX - newElement.getBoundingClientRect().left;
-    offsetY = e.clientY - newElement.getBoundingClientRect().top;
+    console.log('点击')
+    isDragging = true;    // 设置现在为拖动状态
+    offsetX = e.clientX - newElement.getBoundingClientRect().left;    // 记录现在的X值
+    offsetY = e.clientY - newElement.getBoundingClientRect().top;     // 记录现在的Y值
+    beforeX = e.clientX;
+    beforeY = e.clientY;
+    afterX = e.clientX;
+    afterY = e.clientY;
     newElement.style.cursor = 'grabbing';
+    newElement.classList.remove('changeAnimation')
   });
 
+  // 当鼠标移动的时候（此时是document，是全局鼠标移动）
   document.addEventListener('mousemove', (e) => {
-    if (!isDragging) return;
+    if (!isDragging) return;    // 若没有在移动状态，则直接返回不动
     newElement.style.left = `${e.clientX - offsetX}px`;
     newElement.style.top = `${e.clientY - offsetY}px`;
+    afterX = e.clientX;
+    afterY = e.clientY;
   });
 
+  // 当鼠标抬起的时候
   document.addEventListener('mouseup', () => {
+    if (isIcon && isDragging) {
+      let moveX = Math.abs(afterX - beforeX)
+      let moveY = Math.abs(afterY - beforeY)
+      if (moveX == 0 && moveY == 0) {   // 当点击的时候
+        console.log('click')
+        newElement.classList.remove('floatIcon')
+        newElement.classList.add('changeAnimation')
+        newElement.classList.add('floatNotes')
+        newElement.removeChild(icon)
+        isIcon = false
+      }
+    }
     isDragging = false;
-    newElement.style.cursor = 'grab';
+    newElement.style.cursor = 'pointer';
   });
 
   oldElement.parentNode.replaceChild(newElement, oldElement)
 }
 
 export default initialization;
+
+

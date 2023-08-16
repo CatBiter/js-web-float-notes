@@ -6,7 +6,8 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'release'),
-    filename: "bundle.js"
+    filename: "bundle.js",
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -25,11 +26,11 @@ module.exports = {
       }, {
         test: /\.(jpg|jpeg|png|svg|gif)$/,
         use: [{
-          loader: 'url-loader',
+          loader: 'file-loader',
           options: {
-            limit: 8192,
-            outputPath: 'assets/',
-            name: '[name].[ext]'
+            outputPath: 'assets/icon',
+            name: '[name].[ext]',
+            publicPath: '../assets/icon'
           }
         }]
       }
@@ -38,8 +39,7 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css'
+      filename: 'assets/css/[name].css',
     })
   ]
 }
