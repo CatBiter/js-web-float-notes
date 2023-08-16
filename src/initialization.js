@@ -1,15 +1,8 @@
 import './assets/css/style.css'
 
-function initialization (id) {
-  let oldElement = document.getElementById(id);
-  let newElement = document.createElement('div')
-  newElement.classList.add('floatIcon')
-  newElement.classList.add('floatShadow')
-  newElement.classList.add('floatPosition')
-  let icon = document.createElement('img')
-  icon.src = '/src/assets/icon/note.svg'
-  icon.classList.add('noteIcon')
-  newElement.appendChild(icon)
+function initialization (appContainer) {
+  let newElement = document.getElementById('floatIcon')
+  let icon = document.getElementById('icon')
 
   // 拖动
   let isDragging = false;   // 是否正在拖动
@@ -60,6 +53,12 @@ function initialization (id) {
         newElement.classList.add('changeAnimation')
         newElement.classList.add('floatNotes')
         newElement.removeChild(icon)
+        newElement.innerHTML = `
+          <div class="noteTop">
+            <div></div>
+            <div class="closeIcon"></div>
+          </div>
+        `
         isIcon = false
       }
     }
@@ -67,7 +66,6 @@ function initialization (id) {
     newElement.style.cursor = 'pointer';
   });
 
-  oldElement.parentNode.replaceChild(newElement, oldElement)
 }
 
 export default initialization;

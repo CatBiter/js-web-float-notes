@@ -1,5 +1,6 @@
 const path = require('path')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')   // 处理css
+const HtmlWebpackPlugin = require('html-webpack-plugin')          // 将html跟js关联
 
 module.exports = {
   mode: 'development',
@@ -7,7 +8,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'release'),
     filename: "bundle.js",
-    publicPath: '/'
+    publicPath: './'
   },
   module: {
     rules: [
@@ -40,6 +41,9 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'assets/css/[name].css',
+    }),
+    new HtmlWebpackPlugin({
+      template: 'src/index.html'
     })
   ]
 }

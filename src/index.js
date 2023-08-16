@@ -1,16 +1,11 @@
 import './assets/css/style.css'
 import initialization from './initialization'
 
-initialization('notes')
-// // 初始化
-// const draggableIcon = document.createElement('div')
+const appContainer = document.getElementById('notes')
+appContainer.innerHTML = `
+  <div id="floatIcon" class="floatIcon floatPosition floatShadow">
+    <img id="icon" src="${'/src/assets/icon/note.svg'}" class="noteIcon"></img>
+  </div>
+`
 
-
-// const draggableDiv = document.createElement('div');
-// draggableDiv.textContent = '拖动框1';
-// draggableDiv.classList.add('floatDiv')
-
-
-
-
-// document.body.appendChild(draggableDiv);
+initialization(appContainer)
