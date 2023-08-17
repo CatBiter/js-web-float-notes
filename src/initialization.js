@@ -1,4 +1,5 @@
 import './assets/css/style.css'
+import initNoteCard from './initNoteCard';
 
 function initialization (appContainer) {
   let newElement = document.getElementById('floatIcon')
@@ -53,12 +54,7 @@ function initialization (appContainer) {
         newElement.classList.add('changeAnimation')
         newElement.classList.add('floatNotes')
         newElement.removeChild(icon)
-        newElement.innerHTML = `
-          <div class="noteTop">
-            <div></div>
-            <div class="closeIcon"></div>
-          </div>
-        `
+        initNoteCard(newElement)
         isIcon = false
       }
     }
