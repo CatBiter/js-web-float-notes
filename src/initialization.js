@@ -1,67 +1,65 @@
 import './assets/css/style.css'
-import initNoteCard from './initNoteCard';
+import { openNotes } from './changeUI'
 
-function initialization (appContainer) {
-  let newElement = document.getElementById('floatIcon')
-  let icon = document.getElementById('icon')
+function initialization () {
+  // 初始化
+  const appContainer = document.getElementById('notes')
+  appContainer.innerHTML = `
+    <div id="floatBox" class="floatIcon floatPosition floatShadow">
+      <img id="floatIcon" src="${'/src/assets/icon/note.svg'}" class="noteIcon"></img>
+    </div>
+  `
 
-  // 拖动
+  // 获取参数
+  let floatBox = document.getElementById('floatBox')
+
+  // 设置参数
   let isDragging = false;   // 是否正在拖动
-  let offsetX = 0;          // 整个的X轴值
-  let offsetY = 0;          // 整个的Y轴值
-
+  let offsetX = 0;          // 鼠标点击当前元素距左上角的宽
+  let offsetY = 0;          // 鼠标点击当前元素距左上角的高
   // 判断是点击还是拖动
   let beforeX = 0;
   let beforeY = 0;
   let afterX = 0;
   let afterY = 0;
-
-  // 是否是图标
+  // 判断是否为图标
   let isIcon = true;
 
-
-  // 当浮动图标被按下的时候
-  newElement.addEventListener('mousedown', (e) => {
-    console.log('点击')
-    isDragging = true;    // 设置现在为拖动状态
-    offsetX = e.clientX - newElement.getBoundingClientRect().left;    // 记录现在的X值
-    offsetY = e.clientY - newElement.getBoundingClientRect().top;     // 记录现在的Y值
+  // 设置事件
+  floatBox.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    offsetX = e.clientX - floatBox.getBoundingClientRect().left;    // 鼠标在全局的横坐标 - 当前点击元素距离左屏幕的横坐标 = 当前元素距左上角的坐标
+    offsetY = e.clientY - floatBox.getBoundingClientRect().top;
     beforeX = e.clientX;
     beforeY = e.clientY;
     afterX = e.clientX;
     afterY = e.clientY;
-    newElement.style.cursor = 'grabbing';
-    newElement.classList.remove('changeAnimation')
-  });
+  })
 
-  // 当鼠标移动的时候（此时是document，是全局鼠标移动）
-  document.addEventListener('mousemove', (e) => {
-    if (!isDragging) return;    // 若没有在移动状态，则直接返回不动
-    newElement.style.left = `${e.clientX - offsetX}px`;
-    newElement.style.top = `${e.clientY - offsetY}px`;
+  document.addEventListener('mousemove', (e) => {     // 设置document来监听移动而不是floatBox是因为拖动鼠标移动太快，拖拽动作可能会失效
+    if (!isDragging) return;
+    floatBox.style.left = `${e.clientX - offsetX}px`;       // floatBox的坐标 = 鼠标的当前坐标 - 鼠标点击时当前元素距左上角的宽
+    floatBox.style.top = `${e.clientY - offsetY}px`;
     afterX = e.clientX;
     afterY = e.clientY;
-  });
+  })
 
-  // 当鼠标抬起的时候
-  document.addEventListener('mouseup', () => {
-    if (isIcon && isDragging) {
-      let moveX = Math.abs(afterX - beforeX)
-      let moveY = Math.abs(afterY - beforeY)
-      if (moveX == 0 && moveY == 0) {   // 当点击的时候
-        console.log('click')
-        newElement.classList.remove('floatIcon')
-        newElement.classList.add('changeAnimation')
-        newElement.classList.add('floatNotes')
-        newElement.removeChild(icon)
-        initNoteCard(newElement)
-        isIcon = false
-      }
-    }
+  document.addEventListener('mouseup', (e) => {
     isDragging = false;
-    newElement.style.cursor = 'pointer';
-  });
+    if (isClick(beforeX, beforeY, afterX, afterY)) {
+      openNotes()
+    }
+  })
+}
 
+function isClick (beforeX, beforeY, afterX, afterY) {
+  let moveX = Math.abs(afterX - beforeX)
+  let moveY = Math.abs(afterY - beforeY)
+  if (moveX == 0 && moveY == 0) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 export default initialization;
