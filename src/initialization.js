@@ -7,6 +7,10 @@ function initialization () {
   appContainer.innerHTML = `
     <div id="floatBox" class="floatIcon floatPosition floatShadow">
       <img id="floatIcon" src="${'/src/assets/icon/note.svg'}" class="noteIcon"></img>
+      <div id="floatNotesTop" class="floatNotesTop">
+        <img id="closeIcon" src="${'/src/assets/icon/close.png'}" class="closeIcon"></img>
+      </div>
+      <div id="floatNotesContent"></div>
     </div>
   `
 
