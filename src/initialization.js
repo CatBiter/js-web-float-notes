@@ -5,7 +5,7 @@ function initialization () {
   // 初始化
   const appContainer = document.getElementById('notes')
   appContainer.innerHTML = `
-    <div id="floatBox" class="floatIcon floatPosition floatShadow">
+    <div id="floatBox" class="floatIcon floatPosition floatShadow floatIconActive">
       <img id="floatIcon" src="${'/src/assets/icon/note.svg'}" class="noteIcon"></img>
       <div id="floatNotesTop" class="floatNotesTop">
         <img id="closeIcon" src="${'/src/assets/icon/close.png'}" class="closeIcon"></img>

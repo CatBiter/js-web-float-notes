@@ -9,6 +9,7 @@ export function openNotes () {
   let floatNotesContent = document.getElementById('floatNotesContent');
   let closeIcon = document.getElementById('closeIcon');
 
+  floatBox.classList.remove('floatIconActive')
 
   // 创建动画序列
   const timeline = anime.timeline({
