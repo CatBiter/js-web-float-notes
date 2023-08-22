@@ -75,9 +75,13 @@
   float: right;
 }
 
-.a{
-  background-color: #fdb60f;
+
+.floatNotesContent{
+  width: 240px;
+  height: 30px;
+  display: none;
 }
+
 
 
 /* 动画 */

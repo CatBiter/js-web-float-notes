@@ -1,6 +1,9 @@
 import './assets/css/style.css'
 import { openNotes } from './changeUI'
 
+import Cookies from 'js-cookie'
+import moment from 'moment'
+
 function initialization () {
   // 初始化
   const appContainer = document.getElementById('notes')
@@ -10,9 +13,20 @@ function initialization () {
       <div id="floatNotesTop" class="floatNotesTop">
         <img id="closeIcon" src="${'/src/assets/icon/close.png'}" class="closeIcon"></img>
       </div>
-      <div id="floatNotesContent"></div>
+      <div id="floatNotesContent" class="floatNotesContent">
+        <div class="notesItem">添加新笔记</div>
+      </div>
     </div>
   `
+
+  // 临时设置测试
+  let notes = [
+    { id: '123546825', createDate: moment().format('YYYY-MM-DD hh:mm-ss'), message: '笔记1' },
+    { id: '123546865', createDate: moment().format('YYYY-MM-DD hh:mm-ss'), message: '笔记2' },
+    { id: '123546825', createDate: moment().format('YYYY-MM-DD hh:mm-ss'), message: '笔记3' },
+  ]
+  console.log(notes)
+  Cookies.set('notes', JSON.stringify(notes))
 
   // 获取参数
   let floatBox = document.getElementById('floatBox')
@@ -49,10 +63,11 @@ function initialization () {
   })
 
   document.addEventListener('mouseup', (e) => {
-    isDragging = false;
-    if (isClick(beforeX, beforeY, afterX, afterY)) {
+    if (isClick(beforeX, beforeY, afterX, afterY) && isIcon && isDragging) {
       openNotes()
+      isIcon = false;
     }
+    isDragging = false;
   })
 }
 
